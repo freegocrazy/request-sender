@@ -11,10 +11,15 @@ looptime = input("How many requests to send: ")
 # get input for how many threads to use
 threadamount = input("How many threads to use (sends the amount of request per thread): ")
 
+# proxy list
+proxy = {
+    'http': 'http://64.227.62.123:80'
+}
+
 def send_requests():
     for i in range(int(looptime)):
         # send the request
-        requestinfo = requests.get(url)
+        requestinfo = requests.get(url, proxies=proxy)
 
         # print out a success response
         print("[SUCCESS] Response sent")
