@@ -6,6 +6,9 @@ import random
 # get input for the url var
 url = input("URL: ")
 
+# get input for useragent list
+uafile = input("User-Agent file: ")
+
 # get input for looptime var
 looptime = input("How many requests to send: ")
 
@@ -316,10 +319,28 @@ proxy = {
     "http": "36.67.27.189:39674"
 }
 
+# load user agent fucntion
+def load_ua(uafile=USER_AGENTS_FILE):
+    uas = []
+    with open(uafile, 'rb') as uaf:
+        for ua in uaf.readlines():
+            if ua:
+                uas.append(ua.strip()[1:-1-1])
+    random.shuffle(uas)
+    return uas
+
+# send request function
 def send_requests():
     for i in range(int(looptime)):
+        # load user agents
+        uas = LoadUserAgents()
+        ua = random.choice(uas)
+
+        # set headers
+        headers = {"Connection": "close", "User-Agent": ua}
+
         # send the request
-        requestinfo = requests.get(url, proxies=proxy)
+        requestinfo = requests.get(url, proxies=proxy, headers=headers)
 
         # print out a success response
         print("[SUCCESS] Response sent")
