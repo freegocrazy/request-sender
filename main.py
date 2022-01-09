@@ -7,7 +7,7 @@ import random
 url = input("URL: ")
 
 # get input for useragent list
-uafile = input("User-Agent file: ")
+useragentfile = input("User-Agent file: ")
 
 # get input for looptime var
 looptime = input("How many requests to send: ")
@@ -320,7 +320,7 @@ proxy = {
 }
 
 # load user agent fucntion
-def load_ua(uafile=USER_AGENTS_FILE):
+def load_ua(uafile=useragentfile):
     uas = []
     with open(uafile, 'rb') as uaf:
         for ua in uaf.readlines():
@@ -333,7 +333,7 @@ def load_ua(uafile=USER_AGENTS_FILE):
 def send_requests():
     for i in range(int(looptime)):
         # load user agents
-        uas = LoadUserAgents()
+        uas = load_ua()
         ua = random.choice(uas)
 
         # set headers
