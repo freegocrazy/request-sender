@@ -1,7 +1,7 @@
 # import libraries
 import requests
 import threading
-import json
+import random
 
 # get input for the url var
 url = input("URL: ")
